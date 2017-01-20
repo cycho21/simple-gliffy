@@ -33,6 +33,7 @@ public class GuiManager {
         ovalButton.addActionListener(buttonListener);
         buttonListener.setMainPanel(getGliffyPanel());
         buttonListener.setMainFrame(getGliffyFrame());
+        buttonListener.makeFollwer();
         
         buttonPanel.add(BorderLayout.EAST, rectangleButton);
         buttonPanel.add(BorderLayout.WEST, ovalButton);

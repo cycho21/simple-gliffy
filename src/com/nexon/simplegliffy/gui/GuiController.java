@@ -27,6 +27,7 @@ public class GuiController implements ActionListener, MouseListener {
     private ArrayList<CustomShape> shapes;
 
     private int status = INITIALIZED;
+    private Follower follower;
 
     public GuiController() {
         shapes = new ArrayList<>();
@@ -58,10 +59,12 @@ public class GuiController implements ActionListener, MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         pressedPoint = new CustomPoint(e.getX(), e.getY());
+        follower.setShutDown(false);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        follower.setShutDown(true);
         releasedPoint = new CustomPoint(e.getX(), e.getY());
         addShape();
     }
@@ -153,6 +156,7 @@ public class GuiController implements ActionListener, MouseListener {
 
     public void setMainFrame(GliffyFrame mainFrame) {
         this.mainFrame = mainFrame;
+        
     }
 
     public JPanel getMainPanel() {
@@ -161,5 +165,13 @@ public class GuiController implements ActionListener, MouseListener {
 
     public void setMainPanel(GliffyPanel mainPanel) {
         this.mainPanel = mainPanel;
+    }
+
+    public void makeFollwer() {
+        follower = new Follower();
+        follower.setGliffyPanel(mainPanel);
+        follower.setShutDown(true);
+        Thread thread = new Thread(follower);
+        thread.start();
     }
 }

@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by chan8 on 2017-01-20.
  */
-public class GliffyPanel extends JPanel {
+public class GliffyPanel extends JPanel implements Runnable {
     private Image image;
 
     @Override
@@ -15,8 +15,13 @@ public class GliffyPanel extends JPanel {
         g.drawImage(image, 0, 0, this);
     }
     
-    public void setImage(Image image) {
+    public synchronized void setImage(Image image) {
         this.image = image;
         repaint();
+    }
+
+    @Override
+    public void run() {
+        
     }
 }
